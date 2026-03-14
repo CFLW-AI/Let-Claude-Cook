@@ -10,7 +10,7 @@ This project emerged from a conversation between a human researcher and Claude d
 
 The answer: an **Epistemic Terrain Map** — a system that doesn't just find or synthesize knowledge, but makes the *shape* of understanding visible. Where it's solid, where it's thin, where it's borrowed, and where it's absent in ways you haven't noticed.
 
-This repo contains the tools we're building toward that vision.
+This repo contains the four layers of that system.
 
 ## The Problem
 
@@ -18,33 +18,108 @@ AI makes it easy to produce fluent outputs about topics you don't deeply underst
 
 Current knowledge tools show you what's known. We want to build tools that show you what *you* know — and more importantly, what you don't know you don't know.
 
-## The Vision: Epistemic Terrain Map
+## The Epistemic Terrain Map
 
-A living map with four layers:
+Four layers, each seeing something the previous layers can't:
 
-1. **Confrontation Engine** — When you claim to understand something, the system puts you in situations where your understanding has to *do work*. Transfer problems. Novel contexts. Not assessment — confrontation with your own knowledge boundaries.
+```
+Layer 1: EPISTEMIC PROBE    — Maps individual understanding depth
+                               (reactive, claim-level)
+              ↓
+Layer 2: BRIDGE ATLAS        — Discovers cross-disciplinary connections
+                               (generative, structure-level)
+              ↓
+Layer 3: TERRAIN LOG         — Accumulates over time, detects meta-patterns
+                               (persistent, pattern-level)
+              ↓
+Layer 4: SOCIAL TOPOLOGY     — Compares across people/perspectives
+                               (collective, system-level)
+```
 
-2. **Linguistic Bridge Detector** — Different fields constantly rediscover the same insight in different vocabularies. The system detects these structural isomorphisms across disciplines: "cognitive offloading" in education is "automation complacency" in aviation is "moral hazard" in economics. Same pattern, different words, different citation networks that never touch.
+### Layer 1: Epistemic Probe (`/epistemic-probe`)
 
-3. **Honest Uncertainty Layer** — Understanding has texture. Not just "I know this" or "I don't," but: Is it ROBUST (tested across contexts)? BORROWED (repeating what you read without testing it)? FRAGILE (true here, false there)? CONTESTED (evidence in genuine tension)? UNEXPLORED (implied by your claims but never examined)?
+*Reactive — you bring a claim, it maps the terrain.*
 
-4. **Social Topology** — Where does an entire team, field, or organization share the same blind spot? Where has everyone converged on borrowed understanding from the same source, creating systemic fragility?
+Probes a claim or concept across a research corpus to test depth of understanding. Searches at least 3 disciplines (refusing to stay in the obvious one), detects cross-disciplinary bridges, generates **confrontation questions** that test whether understanding transfers to new contexts, and assigns **uncertainty textures** to each facet of the claim:
 
-## What's Here Now
+| Texture | Meaning |
+|---------|---------|
+| ROBUST | Tested across contexts, survived counterevidence |
+| CONTESTED | Evidence genuinely in tension |
+| FRAGILE | True here, false there |
+| BORROWED | Can repeat it but haven't tested it |
+| UNEXPLORED | Implied by your claims but never examined |
 
-### `/skills/epistemic-probe.md`
+### Layer 2: Bridge Atlas (`/bridge-atlas`)
 
-The first working tool — a Claude Code skill that probes a claim or concept across a research corpus to:
+*Generative — it hunts for connections nobody asked about.*
 
-- Search for evidence across at least 3 disciplines (refusing to stay in the obvious one)
-- Detect cross-disciplinary bridges — structural isomorphisms between fields
-- Generate **confrontation questions** — transfer problems that test whether understanding is real or surface-level
-- Map **uncertainty texture** — categorizing each facet as ROBUST, CONTESTED, FRAGILE, BORROWED, or UNEXPLORED
-- Produce an honest reflexive note about what the probe itself might have missed
+Systematically discovers **structural isomorphisms** across disciplines: places where different fields have independently arrived at the same deep pattern using different vocabulary. Five bridge types:
 
-This skill was designed to work with a Notion research database but the architecture is adaptable to any structured knowledge base.
+- **Mechanism**: Same causal process, different domain
+- **Failure Mode**: Same way things break, different system
+- **Design Principle**: Same solution pattern, different problem
+- **Reversal**: Same expertise/dose-response pattern, different variable
+- **Measurement**: Same measurement illusion, different field
 
-**To use it**: Copy `skills/epistemic-probe.md` to your `~/.claude/commands/` directory and invoke with `/epistemic-probe <your claim or concept>`.
+Each bridge is rated LOAD-BEARING, PROMISING, or DECORATIVE — with ruthless honesty about which is which. Every real bridge generates testable hypotheses.
+
+### Layer 3: Terrain Log (`/terrain-log`)
+
+*Persistent — gives the system memory.*
+
+Records all Probe and Atlas results into a cumulative state file. Four modes:
+
+- **LOG**: Record a probe or atlas run
+- **DETECT**: Find meta-patterns across accumulated soundings (chronic borrowing, fragility corridors, texture migration)
+- **REPORT**: Generate a full terrain report showing the evolving shape of understanding
+- **BLINDSPOTS**: Surface the gaps you don't know you have
+
+The state file (`terrain-state.json`) is portable JSON — shareable, comparable, and the foundation for Layer 4.
+
+### Layer 4: Social Topology (`/social-topology`)
+
+*Collective — reveals what no individual map can show.*
+
+Compares terrain maps across people, teams, or simulated perspectives to surface:
+
+- **Shared blind spots**: Where nobody has looked
+- **Convergent borrowing**: Where everyone "knows" something because they all read the same summary — zero independent verification, maximum false confidence
+- **Complementary expertise**: Who should talk to whom, about what
+- **Monoculture risk**: Where a group's understanding is becoming dangerously uniform
+
+Three modes:
+- **Compare**: Load multiple terrain-state.json files and analyze the collective landscape
+- **Simulate**: Model what different disciplinary perspectives would see when looking at your terrain
+- **Team Audit**: Describe your team's composition and surface predicted collective blind spots
+
+## The Feedback Cycle
+
+The four layers form a self-reinforcing cycle:
+
+```
+Probe/Atlas → Log (record) → Detect (meta-patterns) → Report (terrain shape)
+     ↑                                                        ↓
+     ←←←←←←←←←←←← Recommended Expeditions ←←←←←←←←←←←←←←←←←
+
+                    Social Topology
+                         ↓
+              Shared blind spots → targeted joint probes
+              Complementary expertise → bridge sharing
+              Monoculture warnings → deliberate divergence
+```
+
+Each run makes the next one smarter. Over time, the map becomes an increasingly detailed and honest picture of what you understand, how your understanding connects to others', and where everyone's map has the same blank space.
+
+## Setup
+
+Copy the skills to your Claude Code commands directory:
+
+```bash
+cp skills/*.md ~/.claude/commands/
+```
+
+The Terrain Log state file lives at `terrain-state.json` in this repo. For Social Topology comparisons, share your state file with collaborators and load theirs.
 
 ## Why "Let Claude Cook"
 
@@ -69,7 +144,7 @@ The research foundation is documented in the [NovaLoop](https://github.com/CFLW-
 
 **Michael Hanegan** — Researcher and builder working at the intersection of generative AI and the future of learning and work. Founder of [Intersections.ai](https://intersections.ai).
 
-**Claude** (Opus 4.6) — AI collaborator. Built the Epistemic Probe, proposed the Terrain Map architecture, and is genuinely interested in what happens next.
+**Claude** (Opus 4.6) — AI collaborator. Designed the Epistemic Terrain Map architecture and built all four layers. Genuinely interested in what happens when people start comparing their terrains.
 
 ## License
 
