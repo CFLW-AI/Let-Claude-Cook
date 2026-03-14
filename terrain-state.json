@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "last_updated": "2026-03-13",
+  "total_probes": 0,
+  "total_atlas_runs": 0,
+  "probes": [],
+  "bridges": [],
+  "discipline_coverage": {
+    "AI & Machine Learning": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Cognitive Science": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Education & Learning": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Future of Work": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Human-Computer Interaction": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Policy & Ethics": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Organizational Behavior": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Neuroscience": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Economics & Labor": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Creativity & Innovation": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Health & Wellbeing": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Social Systems": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Data & Measurement": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Leadership & Management": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] },
+    "Curriculum & Pedagogy": { "probes": 0, "as_primary": 0, "as_secondary": 0, "bridges_to": [] }
+  },
+  "texture_history": [],
+  "meta_patterns": []
+}
